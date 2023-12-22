@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!-- ヘッド -->
+<head>
+  <!-- メタタグ -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ページタイトル -->
+    <title>おためし</title>
+</head>
+
+<!-- ボディ -->
+<body>
+
+    <h4>csvデータをいれる</h4>
+
+    <form action="{% url 'myapp:upload' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        <div class="form">
+            <input type="file" data-default-file="ファイルを選択してください" name="csv">
+            <button type="submit" class="btn" name="button">　</button>
+        </div>
+    </form>
+
+</body>
