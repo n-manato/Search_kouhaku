@@ -4,17 +4,17 @@ from django.db import models
 
 
 class League(models.Model):
-    number = models.IntegerField(max_length=32)
+    number = models.IntegerField()
 
     def __str__(self):
-        return self.number
+        return str(self.number)
 
 
 class Year(models.Model):
-    number = models.IntegerField(max_length=32)
+    number = models.IntegerField()
 
     def __str__(self):
-        return self.number
+        return str(self.number)
 
 
 class Team(models.Model):
@@ -25,10 +25,10 @@ class Team(models.Model):
 
 
 class Participation(models.Model):
-    number = models.IntegerField(max_length=32)
+    number = models.IntegerField()
 
     def __str__(self):
-        return self.number
+        return str(self.number)
 
 
 class Person(models.Model):
@@ -60,4 +60,4 @@ class Parent(models.Model):
         Song, on_delete=models.SET_NULL, null=True, related_name='related_Song')
 
     def __str__(self):
-        return self.song
+        return self.song.string

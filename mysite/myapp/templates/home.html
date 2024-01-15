@@ -1,0 +1,83 @@
+<!-- home.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        thead {
+            position: sticky;
+            top: 0;
+            background-color: #f8f9fa; /* グレーの背景色 */
+        }
+    </style>
+    <title>Form Example</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="form-row">
+                <!-- セレクトボックス -->
+                <div class="form-group col-md-4">
+                    <label for="selectOption">検索オプション:</label>
+                    <select class="form-control" id="selectOption" name="selectOption">
+                        <option value="league">開催回数</option>
+                        <option value="year">開催した年</option>
+                        <option value="team">赤組か白組</option>
+                        <option value="participation">出場回数</option>
+                        <option value="person">歌手</option>
+                        <option value="song">曲名</option>
+                    </select>
+                </div>
+
+                <!-- テキストボックス -->
+                <div class="form-group col-md-4">
+                    <label for="textBox">入力:</label>
+                    <input type="text" class="form-control" id="textBox" name="textBox">
+                </div>
+
+                <!-- 送信ボタン -->
+                <div class="form-group col-md-4 align-self-end">
+                    <button type="submit" class="btn btn-primary">検索</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- 表示するデータがある場合のみテーブルを表示 -->
+        {% if data %}
+            <table class="table mt-3">
+                <thead class="sticky-top">
+                    <tr>
+                        <th>開催回数</th>
+                        <th>年</th>
+                        <th>チーム</th>
+                        <th>出場回数</th>
+                        <th>歌手名</th>
+                        <th>曲名</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in data %}
+                        <tr>
+                            <td>{{ item.league.number }}</td>
+                            <td>{{ item.year.number }}</td>
+                            <td>{{ item.team.string }}</td>
+                            <td>{{ item.participation.number }}</td>
+                            <td>{{ item.person.all|join:', ' }}</td>
+                            <td>{{ item.song.string }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+
+    <!-- BootstrapのJavaScriptとjQueryのリンク -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
